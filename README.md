@@ -14,7 +14,7 @@
 
 | Endpoint                  | Method | Auth | Keterangan                                      |
 |---------------------------|--------|------|-------------------------------------------------|
-| `/api/login`             | POST   | ❌   | Login user dan dapatkan token                   |
+| `/api/auth/login`             | POST   | ❌   | Login user dan dapatkan token                   |
 | `/api/users`             | GET    | ✅   | List semua user                          |
 | `/api/users`             | POST   | ✅   | Tambah user baru                              |
 | `/api/users/{id}`        | GET    | ✅   | Tampilkan detail user tertentu            |
@@ -29,7 +29,7 @@
 
 ## 🔐 Autentikasi
 
-Gunakan endpoint `/api/login` untuk login dan mendapatkan token:
+Gunakan endpoint `/api/auth/login` untuk login dan mendapatkan token:
 ```json
 {
   "email": "user@example.com",
