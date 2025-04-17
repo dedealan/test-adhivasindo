@@ -32,7 +32,42 @@
 Gunakan endpoint `/api/auth/login` untuk login dan mendapatkan token:
 ```json
 {
-  "email": "user@example.com",
-  "password": "your_password"
+  "email": "user@dummy.com",
+  "password": "user123"
 }
+```
+
+## 🔧 Cara Install
+
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini:
+
+```bash
+# 1. Clone repository
+git clone https://github.com/dedealan/test-adhivasindo.git
+cd test-adhivasindo
+
+# 2. Install dependencies
+composer install
+
+# 3. Copy konfigurasi environment
+cp .env.example .env
+
+# 4. Generate app key
+php artisan key:generate
+
+# 5. Atur koneksi database di file .env
+# Contoh:
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=tht_adhivasindo
+# DB_USERNAME=root
+# DB_PASSWORD=
+
+# 6. Jalankan migrasi dan seeder
+php artisan migrate --seed
+
+# 7. Jalankan server lokal
+php artisan serve
+```
 
