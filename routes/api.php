@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-
-
+    Route::resource('users', UserController::class);
 
     // Route::post('auth/logout', [AuthController::class, 'logout']);
 });
 
-Route::post('auth/login', [AuthController::class, 'login']);
+Route::prefix('auth')->group(function () {
+    Route::get('login', function () {
+        return response()->json([
+            'status' => true,
+            'message' => 'Silahkan login.',
+        ], 200);
+    })->name('login');
+
+    Route::post('login', [AuthController::class, 'login']);
+});
