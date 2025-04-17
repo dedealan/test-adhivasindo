@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('users', UserController::class);
 
-    // Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::prefix('cari')->group(function () {
+        Route::get('nama', [SearchController::class,'searchByName'])->name('searchByName');
+        Route::get('nim', [SearchController::class,'searchByNim'])->name('searchByNim');
+        Route::get('ymd', [SearchController::class,'searchByYmd'])->name('searchByYmd');
+    });
+
+    Route::post('auth/logout', [AuthController::class, 'logout']);
 });
 
 Route::prefix('auth')->group(function () {
