@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class SearchController extends Controller
@@ -30,12 +31,23 @@ class SearchController extends Controller
     }
 
     /**
+     * Cached Data
+     *
+     */
+    protected function cachedData()
+    {
+        return Cache::remember('data', 180, function () {
+            return $this->fetchData();
+        });
+    }
+
+    /**
      * Search data by NAMA
      *
      */
     public function searchByName(Request $request)
     {
-        $data = $this->fetchData();
+        $data = $this->cachedData();
         $keyword = $request->input('q');
 
         return $data->where('NAMA', $keyword)->values();
@@ -47,7 +59,7 @@ class SearchController extends Controller
      */
     public function searchByNim(Request $request)
     {
-        $data = $this->fetchData();
+        $data = $this->cachedData();
         $keyword = $request->input('q');
 
         return $data->where('NIM', $keyword)->values();
@@ -59,7 +71,7 @@ class SearchController extends Controller
      */
     public function searchByYmd(Request $request)
     {
-        $data = $this->fetchData();
+        $data = $this->cachedData();
         $keyword = $request->input('q');
 
         return $data->where('YMD', $keyword)->values();
