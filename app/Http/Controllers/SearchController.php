@@ -36,7 +36,7 @@ class SearchController extends Controller
     public function searchByName(Request $request)
     {
         $data = $this->fetchData();
-        $keyword = $request->input('search');
+        $keyword = $request->input('q');
 
         return $data->where('NAMA', $keyword)->values();
     }
@@ -48,7 +48,7 @@ class SearchController extends Controller
     public function searchByNim(Request $request)
     {
         $data = $this->fetchData();
-        $keyword = $request->input('search');
+        $keyword = $request->input('q');
 
         return $data->where('NIM', $keyword)->values();
     }
@@ -60,7 +60,7 @@ class SearchController extends Controller
     public function searchByYmd(Request $request)
     {
         $data = $this->fetchData();
-        $keyword = $request->input('search');
+        $keyword = $request->input('q');
 
         return $data->where('YMD', $keyword)->values();
     }
