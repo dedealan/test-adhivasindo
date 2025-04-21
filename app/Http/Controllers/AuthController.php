@@ -27,10 +27,9 @@ class AuthController extends Controller
             return response([
                 "message" => "Email atau password salah.",
                 "status" => false,
-            ], 404);
+            ], 401);
         }
 
-        $user->password = Hash::make($request->password);
         return response([
             "message" => "Login berhasil",
             "token" => $user->createToken("auth_token")->plainTextToken,
