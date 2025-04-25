@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('users', UserController::class);
 
     Route::prefix('cari')->group(function () {
+        Route::get('/', [SearchController::class,'search'])->name('search');
         Route::get('nama', [SearchController::class,'searchByName'])->name('searchByName');
         Route::get('nim', [SearchController::class,'searchByNim'])->name('searchByNim');
         Route::get('ymd', [SearchController::class,'searchByYmd'])->name('searchByYmd');

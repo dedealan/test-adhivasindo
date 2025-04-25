@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Str;
 
 class SearchController extends Controller
 {
@@ -39,6 +40,20 @@ class SearchController extends Controller
         return Cache::remember('data', 180, function () {
             return $this->fetchData();
         });
+    }
+
+    /**
+     * Search data
+     */
+    public function search(Request $request)
+    {
+        $data = $this->cachedData();
+        $keyword = $request->input('q');
+
+        return $data->filter(function ($item) use ($keyword) {
+            return Str::contains(Str::lower($item['NAMA']), Str::lower($keyword)) || Str::contains(Str::lower($item['NIM']), Str::lower($keyword)) || Str::contains(Str::lower($item['YMD']), Str::lower($keyword));
+        })
+            ->values();
     }
 
     /**
